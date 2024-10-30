@@ -1,0 +1,130 @@
+<!--@name Two Cols Title Text Image @-->
+<!--@screenshot https://s3-us-west-2.amazonaws.com/bloks.co/bloks/grid/two-cols-title-text-image/screenshot.png @-->
+<!--@styles
+{
+    "paddingTop": 30,
+    "paddingBottom": 30
+}
+@-->
+<!--@settings
+{
+    "showtitle": true,
+    "showdescription": true,
+    "showsubtitle": true,
+    "showsubdescription": true,
+    "showmedia": true,
+    "showbutton": true,
+    "maxheight": 700,
+    "minheight": 300,
+    "height": 360
+}
+@-->
+<!--@header
+{
+    "title": "<h2 style='text-align: center;'><strong>Travel Guide</strong></h2>",
+    "description": "<p style='text-align: center;'>Etiam porttitor mi id vulputate tempus vivamus tempus lorem vulputate cras mattis tempor aliquam.</p>"
+}
+@-->
+<!--@grid
+[
+    {
+        "url": "https://s3-us-west-2.amazonaws.com/bloks.co/bloks/grid/two-cols-title-text-image/grid-11.jpg",
+        "href": "",
+        "alt": "bloks image",
+        "maxwidth": "",
+        "maxheight": "",
+        "newtab": false,
+        "isgrid": "1"
+    },
+    {
+        "subtitle": "<h3><strong>Sed vestibulum libero sit amet massa</strong></h3>",
+        "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In at molestie mi. Aenean suscipit, ante id sagittis vulputate, nibh libero mollis risus, id sodales augue est quis lorem. Sed vestibulum libero sit amet massa pulvinar maximus. Sed sit amet viverra quam, nec faucibus lectus. Sed facilisis, ipsum sed vulputate condimentum, quam justo mollis enim, sit amet congue justo turpis nec sem. Mauris mattis ultricies lectus faucibus pulvinar. Fusce commodo, massa in porttitor tincidunt, neque orci rhoncus ipsum, id lacinia neque eros at metus. Proin gravida justo vel tempor consequat. Aenean id ipsum sit amet nunc malesuada ornare. Aliquam sodales quis lectus nec.</p>",
+        "isgrid": "1",
+        "button": "1"
+    }
+]
+@-->
+<!--@button
+{
+    "text": "Read more",
+    "align": "bloks__button-left",
+    "size": "bloks__button-medium",
+    "background": "transparent",
+    "color": "#6C6C6C",
+    "newtab": false
+}
+@-->
+<!--@colorsets
+{
+    "dark": {
+        "styles.backgroundColor": "rgba(77, 77, 77, 1)",
+        "button.color": "#ffffff"
+    },
+    "none": {
+        "styles.backgroundColor": "rgba(255, 255, 255, 0.6)",
+        "button.color": "#6C6C6C"
+    }
+}
+@-->
+<div v-settings="{title: 'Grid <span class=\'\ibloks-chevron-right\'\></span> Two Cols Title Text Image', grid: 'settings'}" v-bind:class="colorset"
+     v-bind:style="{
+     backgroundAttachment:styles.backgroundAttachment,
+     paddingTop: styles.paddingTop + 'px',
+     paddingBottom: styles.paddingBottom + 'px',
+     paddingRight: styles.paddingRight + 'px',
+     paddingLeft: styles.paddingLeft + 'px',
+     backgroundImage: 'url(' + styles.backgroundImage + ')',
+     backgroundRepeat: styles.backgroundRepeat,
+     backgroundPosition: styles.backgroundPosition,
+     }"
+     class="bloks__block bloks__block-grid">
+    <div class="bloks-wrap-container">
+        <div v-bind:class="styles.classContainer" class="bloks__block-boxed">
+            <div class="container-fluid">
+                <div class="row grid-content">
+                    <template v-if="settings.showtitle">
+                        <div class="title col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+                            <bloks-editor :content.sync="header.title" placeholder="Your title here!" default-paragraph="h2" :mode="['full']"></bloks-editor>
+                        </div>
+                    </template>
+                    <template v-if="settings.showdescription">
+                        <div class="description des-subtitle margin_19 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+                            <bloks-editor :content.sync="header.description" placeholder="Your text here!"></bloks-editor>
+                        </div>
+                    </template>
+                    <div class="col-md-12 grid-text-content grid-two-cols">
+                        <div class="col-md-6 col-sm-12 col-xs-12 grid-cols" v-for="(n, item) in grid">
+                            <div class="grid-item" v-col>
+                                <template v-if="grid[n].url !== undefined">
+                                    <div class="wrap-image" v-show="settings.showmedia" v-bind:style="{ height: settings.height + 'px' }">
+                                        <bloks-media :src.sync="grid[n].url"
+                                                     :href.sync="grid[n].href"
+                                                     :newtab.sync="grid[n].newtab"
+                                                     :settings="{ allow: ['image'] }"
+                                                     :maxheight.sync="grid[n].maxheight"
+                                                     :maxwidth.sync="grid[n].maxwidth"></bloks-media>
+                                    </div>
+                                </template>
+                                <div v-if="grid[n].subtitle !== undefined && settings.showsubtitle" data-element="subtitle" class="subtitle margin_top_0">
+                                    <bloks-editor :content.sync="grid[n].subtitle" placeholder="Your text here!"></bloks-editor>
+                                </div>
+                                <div v-if="grid[n].description !== undefined && settings.showsubdescription" data-element="subdescription" class="subdescription">
+                                    <bloks-editor :content.sync="grid[n].description" placeholder="Your text here!"></bloks-editor>
+                                </div>
+                                <bloks-button v-if="grid[n].button !== undefined && settings.showbutton"
+                                              :href.sync="button.href"
+                                              :title.sync="button.text"
+                                              :align.sync="button.align"
+                                              :size.sync="button.size"
+                                              :background.sync="button.background"
+                                              :color.sync="button.color"
+                                              :newtab.sync="grid[n].button.newtab"></bloks-button>
+                                <input type="hidden" value="{{n}}" name="index" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

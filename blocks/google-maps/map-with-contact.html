@@ -1,0 +1,96 @@
+<!--@name Google map with contact@-->
+<!--@screenshot https://s3-us-west-2.amazonaws.com/bloks.co/bloks/google-map/map-with-contact/screenshot.png @-->
+<!--@address
+[
+    {"title": "London", "icon": "http://bloks.co/demo_images/marker.png"}
+]
+@-->
+<!--@styleMap
+[]
+@-->
+<!--@vars
+{
+    "classmap": "map-preview",
+    "styles": {
+        "classContainer": "container-fullwidth",
+        "backgroundImage": "",
+        "paddingTop": 30,
+        "paddingBottom": 30,
+        "paddingLeft": 40,
+        "paddingRight": 40,
+        "backgroundColor": "rgba(255,255,255,0.67)"
+    },
+    "map": {
+        "header": "<h2 style='text-align: center;'><strong>Contact Us</strong></h2>",
+        "subheader": "<h4 style='text-align: center;'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h4>"
+    },
+    "contact": {
+        "info": "<p><strong>Contact Information</strong> </p>",
+        "title": "<strong>Address:</strong>",
+        "address": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dictum magna vitae enim maximus vulputate. Nam egestas efficitur urna, eu iaculis dui aliquet vel. </p>",
+        "phone": "<p><strong>Phone: </strong><span>0123456789  -  0123456789</span></p>",
+        "fax": "<p><strong>Fax: </strong><span>0123456789  -  0123456789</span></p>",
+        "email": "<p><strong>Email: </strong><span>support@xfox.co</span></p>"
+    },
+    "settings": {
+        "header": true,
+        "content": true
+    },
+    "colorsets": {
+        "dark": {
+            "styles.backgroundColor": "rgba(77, 77, 77, 1)"
+        },
+        "none": {
+            "styles.backgroundColor": "rgba(255, 255, 255, 0.6)"
+        }
+    }
+}
+@-->
+<div v-bind:class="colorset"
+     v-settings="{ title: 'Google Maps <span class=\'\ibloks-chevron-right\'\></span> With Contact', map: {sync: 'address', class: classmap, custommap: styleMap}, layout: 'settings' }"
+     class="bloks__block bloks-google-map map-with-text"
+     v-bind:style="{
+     backgroundAttachment:styles.backgroundAttachment,
+     paddingTop: styles.paddingTop + 'px',
+     paddingBottom: styles.paddingBottom + 'px',
+     paddingRight: styles.paddingRight + 'px',
+     paddingLeft: styles.paddingLeft + 'px',
+     backgroundImage: 'url(' + styles.backgroundImage + ')',
+     backgroundRepeat: styles.backgroundRepeat,
+     backgroundPosition: styles.backgroundPosition,
+     }">
+    <div class="bloks__block-content bloks__block-boxed" v-bind:class="styles.classContainer">
+        <div class="contact-header" v-if="settings.header">
+            <bloks-editor :content.sync="map.header" placeholder="Your title here!" default-paragraph="h2" :mode="['full']"></bloks-editor>
+        </div>
+        <div class="contact-sub-header" v-if="settings.content">
+            <bloks-editor :content.sync="map.subheader" placeholder="Your text here!" default-paragraph="h4"></bloks-editor>
+        </div>
+        <div v-googlemap="classmap" class="map-row row">
+            <div id="{{classmap}}_{{id}}" class="loader-map col-md-6 {{classmap}}"></div>
+            <div class="contact-store col-md-6">
+
+                <bloks-editor :content.sync="contact.info" placeholder="Your text here!" class="title-form"></bloks-editor>
+                <div class="contact-map contact-address">
+                    <span class='fa fa-home'>&nbsp;&nbsp;</span>
+                    <bloks-editor :content.sync="contact.title"  placeholder="Your text here!" class="title-editor"></bloks-editor>
+                </div>
+                <div class="contact-map sub-contact-address">
+                    <bloks-editor :content.sync="contact.address" placeholder="Your text here!"></bloks-editor>
+                </div>
+                <div class="contact-map contact-phone">
+                    <span class='fa fa-phone-square'>&nbsp;&nbsp;</span>
+                    <bloks-editor :content.sync="contact.phone" placeholder="Your text here!" class="title-editor"></bloks-editor>
+                </div>
+                <div class="contact-map contact-phone">
+                    <span class='fa fa-fax'>&nbsp;&nbsp;</span>
+                    <bloks-editor :content.sync="contact.fax" placeholder="Your text here!" class="title-editor"></bloks-editor>
+                </div>
+                <div class="contact-map contact-email">
+                    <span class='fa fa-envelope'>&nbsp;&nbsp;</span>
+                    <bloks-editor :content.sync="contact.email" placeholder="Your text here!" class="title-editor"></bloks-editor>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,147 @@
+<!--@name Slide Cover @-->
+<!--@screenshot https://s3-us-west-2.amazonaws.com/bloks.co/bloks/image/slide-cover/screenshot.png @-->
+
+<!--@vars
+{
+    "title": "Slide",
+    "imagedefault":"https://s3-us-west-2.amazonaws.com/bloks.co/bloks/image/slide-cover/slider-defalut.jpg",
+    "slides": [
+        {
+            "title": "Slider 01",
+            "type": "background",
+            "url": "https://s3-us-west-2.amazonaws.com/bloks.co/bloks/image/slide-cover/slide-01.jpg",
+            "header": "<h2><strong>What is your dream?</strong></h2>",
+            "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quam purus, eleifend in neque a.</p>",
+            "volume": "0",
+            "autoplay": true
+        },
+        {
+            "title": "Slider 02",
+            "type": "background",
+            "url": "https://s3-us-west-2.amazonaws.com/bloks.co/bloks/image/slide-cover/slide-02.jpg",
+            "header": "<h2><strong>What is your dream?</strong></h2>",
+            "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quam purus, eleifend in neque a.</p>",
+            "volume": "0",
+            "autoplay": true
+        },
+        {
+            "title": "Slider 03",
+            "type": "background",
+            "url": "https://s3-us-west-2.amazonaws.com/bloks.co/bloks/image/slide-cover/slide-03.jpg",
+            "header": "<h2><strong>What is your dream?</strong></h2>",
+            "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quam purus, eleifend in neque a.</p>",
+            "volume": "0",
+            "autoplay": true
+        }
+    ],
+    "iscover": true,
+    "href": "",
+    "position":
+    {
+        "header": true,
+        "description": true,
+        "button": false,
+        "class": "bloks__position-middle-center",
+        "buttonalign":"bloks__button-center",
+        "height": "800"
+    },
+    "button": {
+        "text": "Read more",
+        "align": "bloks__button-center",
+        "size": "bloks__button-medium",
+        "href": "#",
+        "background": "#7d7d7d",
+        "color": "#fff",
+        "newtab": false
+    },
+    "colorset": "bloks__colorset-light",
+    "colorsets": {
+        "dark": {
+            "backdrop": "rgba(0, 0, 0, 0.6)",
+            "button.color": "#7d7d7d",
+            "button.background": "#ffffff"
+
+        },
+        "none": {
+            "backdrop": "rgba(255, 255, 255, 0.6)",
+            "button.color": "#ffffff",
+            "button.background": "#7d7d7d"
+        }
+    },
+    "backdrop": "rgba(255, 255, 255, 0.6)"
+}
+@-->
+<div v-bind:class="colorset"
+     v-settings="{title: 'Cover <span class=\'\ibloks-chevron-right\'\></span> Slider Cover', position: 'position',colorpicker: 'backdrop', collection: {sync: 'slides', title: title, imagedefault: imagedefault} }"
+     v-bind:style="{
+     backgroundAttachment:styles.backgroundAttachment,
+     paddingTop: styles.paddingTop + 'px',
+     paddingBottom: styles.paddingBottom + 'px',
+     paddingRight: styles.paddingRight + 'px',
+     paddingLeft: styles.paddingLeft + 'px',
+     backgroundImage: 'url(' + styles.backgroundImage + ')',
+     backgroundRepeat: styles.backgroundRepeat,
+     backgroundPosition: styles.backgroundPosition,
+     }"
+     class="bloks__block bloks__block-image bloks__block-slider-cover">
+    <div v-bind:class="position.class">
+        <div id="carousel-cover-slider-generic-{{_uid}}" class="carousel slide" data-ride="carousel">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <template v-for="(index, item) in slides">
+                    <!--only bind data when slide is active -->
+                    <div :class="['item ',{'active':index == 0 ? true: false}]" class="slider-image"
+                         data-index="{{index}}">
+                        <div class="bloks__block-cover bloks__block-content" v-bind:class="position.class"
+                             v-bind:style="{height: position.height + 'px'}"
+                             data-element="srcbackground">
+                            <bloks-media :title.sync="slides[index].title" :type.sync="slides[index].type"
+                                         :backdrop="backdrop" :src.sync="slides[index].url"
+                                         :autoplay.sync="slides[index].autoplay"
+                                         :iscover.sync="iscover"
+                                         :href.sync="href"
+                                         :settings="{ volume: slides[index].volume, controls: false}">
+                                <div class="bloks__block-cover-content" slot="before-content">
+                                    <div data-index="{{index}}">
+                                        <bloks-editor v-if="position.header" :content.sync="slides[index].header"
+                                                      placeholder="Your title here!" default-paragraph="h2"
+                                                      class="cover-header bloks__block-cover-header" :mode="['full']"></bloks-editor>
+                                        <bloks-editor v-if="position.description"
+                                                      :content.sync="slides[index].description"
+                                                      class="cover-description bloks__block-cover-description"></bloks-editor>
+                                        <bloks-button v-if="position.button"
+                                                      :href.sync="button.href"
+                                                      :title.sync="button.text"
+                                                      :align.sync="position.buttonalign"
+                                                      :size.sync="button.size"
+                                                      :background.sync="button.background"
+                                                      :color.sync="button.color"
+                                                      :newtab.sync="button.newtab"></bloks-button>
+                                    </div>
+                                </div>
+                            </bloks-media>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <template v-for="(index, item) in slides">
+                    <li data-target="#carousel-cover-slider-generic-{{_uid}}" data-slide-to="{{index}}"
+                        v-bind:class="{ active: index === 0 }" class="carousel-item"></li>
+                </template>
+            </ol>
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-cover-slider-generic-{{_uid}}" role="button"
+               data-slide="prev">
+                <span class="ibloks-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-cover-slider-generic-{{_uid}}" role="button"
+               data-slide="next">
+                <span class="ibloks-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+</div>

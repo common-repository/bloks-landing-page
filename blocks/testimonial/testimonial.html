@@ -1,0 +1,172 @@
+<!--@name Testimonial @-->
+<!--@screenshot https://s3-us-west-2.amazonaws.com/bloks.co/bloks/testimonial/screenshot.png @-->
+<!--@styles
+{
+    "paddingTop": 30,
+    "paddingBottom": 30,
+    "backgroundImage": ""
+}
+@-->
+<!--@header
+{
+    "title": "<h2 style='text-align: center;'><strong>Testimonial</strong></h2>"
+}
+@-->
+<!--@vars
+{
+    "title": "Testimonial",
+    "imagedefault": "http://bloks.co/demo_images/image-default.png",
+    "data": [
+        {
+            "title": "Testimonial 1",
+            "url": "https://s3-us-west-2.amazonaws.com/bloks.co/bloks/testimonial/lovely-girl-smile.jpg",
+            "alt": "testimonial",
+            "subtitle": "<h3 style='text-align: center;'>From Customers & Friends</h3>",
+            "description": "<p style='text-align: center;'>Lorem ipsum dolor sit amet, consectetur adipiscing elit hasellus orci lectus, gravida id dolor lacinia, volutpat ultricies dui. Morbi dignissim luctus ipsum, eget pulvinar lorem maximus id. In hac habitasse platea dictumst. Nunc commodo laoreet enim quis dapibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas onec ornare dolor eu nisi facilisis asagittis ligula blandit mollis, est ut pretium eleifend, nibh quam finibus eratin fermentum metusa diamras eleifend.</p>",
+            "provider": "<p>Simon brown - Food Magazine</p>",
+            "button": "More Info",
+            "link": "#",
+            "maxwidth": "inherit",
+            "width": "inherit",
+            "maxheight": "100%",
+            "height": "100%",
+            "type": "image"
+        },
+        {
+            "title": "Testimonial 2",
+            "url": "https://s3-us-west-2.amazonaws.com/bloks.co/bloks/testimonial/lovely-girl-smile.jpg",
+            "alt": "testimonial",
+            "subtitle": "<h3 style='text-align: center;'>From Customers & Friends</h3>",
+            "description": "<p style='text-align: center;'>Lorem ipsum dolor sit amet, consectetur adipiscing elit hasellus orci lectus, gravida id dolor lacinia, volutpat ultricies dui. Morbi dignissim luctus ipsum, eget pulvinar lorem maximus id. In hac habitasse platea dictumst. Nunc commodo laoreet enim quis dapibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas onec ornare dolor eu nisi facilisis asagittis ligula blandit mollis, est ut pretium eleifend, nibh quam finibus eratin fermentum metusa diamras eleifend.</p>",
+            "provider": "<p>Simon brown - Food Magazine</p>",
+            "button": "More Info",
+            "link": "#",
+            "maxwidth": "inherit",
+            "width": "inherit",
+            "maxheight": "100%",
+            "height": "100%",
+            "type": "image"
+        },
+        {
+            "title": "Testimonial 3",
+            "url": "https://s3-us-west-2.amazonaws.com/bloks.co/bloks/testimonial/lovely-girl-smile.jpg",
+            "alt": "testimonial",
+            "subtitle": "<h3 style='text-align: center;'>From Customers & Friends</h3>",
+            "description": "<p style='text-align: center;'>Lorem ipsum dolor sit amet, consectetur adipiscing elit hasellus orci lectus, gravida id dolor lacinia, volutpat ultricies dui. Morbi dignissim luctus ipsum, eget pulvinar lorem maximus id. In hac habitasse platea dictumst. Nunc commodo laoreet enim quis dapibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas onec ornare dolor eu nisi facilisis asagittis ligula blandit mollis, est ut pretium eleifend, nibh quam finibus eratin fermentum metusa diamras eleifend.</p>",
+            "provider": "<p>Simon brown - Food Magazine</p>",
+            "button": "More Info",
+            "link": "#",
+            "maxwidth": "inherit",
+            "width": "inherit",
+            "maxheight": "100%",
+            "height": "100%",
+            "type": "image"
+        }
+    ]
+}
+@-->
+<!--@colorsets
+{
+    "dark": {
+        "styles.backgroundColor": "rgba(77, 77, 77, 1)",
+        "button.color": "#ffffff"
+    },
+    "none": {
+        "styles.backgroundColor": "rgba(255, 255, 255, 0.6)",
+        "button.color": "#6c6c6c"
+    }
+}
+@-->
+<!--@button
+{
+    "size": "bloks__button-medium",
+    "align": "bloks__button-center",
+    "background": "transparent",
+    "color": "#6c6c6c",
+    "newtab": false
+}
+@-->
+
+<div v-bind:class="colorset"
+     v-settings="{ title: 'Testimonial <span class=\'\ibloks-chevron-right\'\></span> Testimonial', collection: {sync: 'data', title: title, imagedefault: imagedefault}  }"
+     v-bind:style="{
+     backgroundAttachment:styles.backgroundAttachment,
+     paddingTop: styles.paddingTop + 'px',
+     paddingBottom: styles.paddingBottom + 'px',
+     paddingRight: styles.paddingRight + 'px',
+     paddingLeft: styles.paddingLeft + 'px',
+     backgroundImage: 'url(' + styles.backgroundImage + ')',
+     backgroundRepeat: styles.backgroundRepeat,
+     backgroundPosition: styles.backgroundPosition,
+     }"
+     class="bloks__block bloks-testimonial bloks-testimonial-slider">
+    <div class="bloks-wrap-container">
+        <div v-bind:class="styles.classContainer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="align_center title">
+                        <bloks-editor :content.sync="header.title" placeholder="Your title here!" default-paragraph="h2" :mode="['full']"></bloks-editor>
+                    </div>
+                    <div id="carousel-testimonoal-generic-{{_uid}}" class="carousel slide" data-ride="carousel" data-interval="5000">
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+                            <!--only bind data when slide is active -->
+                            <div v-for="(index, item) in data" :class="['item ',{'active':index == 0 ? true: false}]" class="align_center" data-index="{{index}}" >
+                                <template v-if="data[index]">
+                                    <div class="testimonial-image">
+                                        <bloks-media
+                                                :src.sync="data[index].url"
+                                                :settings="{ allow: ['image'], link: false }"
+                                                :maxheight.sync="data[index].maxheight"
+                                                :height.sync="data[index].height"
+                                                :width.sync="data[index].width"
+                                                :maxwidth.sync="data[index].maxwidth"></bloks-media>
+                                    </div>
+                                    <div class="filter">
+                                        <div class="subtitle">
+                                            <bloks-editor :content.sync="data[index].subtitle" placeholder="Your title here!" default-paragraph="h3" :mode="['full']"></bloks-editor>
+                                        </div>
+                                        <div class="description">
+                                            <div class="description-content">
+                                                <span class="ibloks-quotation-on"></span>
+                                                <bloks-editor :content.sync="data[index].description" placeholder="Your text here!"></bloks-editor>
+                                                <span class="ibloks-quotation-below"></span>
+                                                <div class="testimonial-button">
+                                                    <bloks-button :href.sync="data[index].link"
+                                                                  :title.sync="data[index].button"
+                                                                  :align.sync="button.align"
+                                                                  :size.sync="button.size"
+                                                                  :background.sync="button.background"
+                                                                  :color.sync="button.color"
+                                                                  :newtab.sync="button.newtab"></bloks-button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <template v-for="(index, item) in data">
+                                <template v-if="data[index]">
+                                    <li data-target="#carousel-testimonoal-generic-{{_uid}}" data-slide-to="{{index}}" class="carousel-item" v-bind:class="{ active: index === 0 } "></li>
+                                </template>
+                            </template>
+                        </ol>
+
+                        <!-- Controls -->
+                        <a class="carousel-control-prev" href="#carousel-testimonoal-generic-{{_uid}}" role="button" data-slide="prev">
+                            <span class="ibloks-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carousel-testimonoal-generic-{{_uid}}" role="button" data-slide="next">
+                            <span class="ibloks-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+<!--@name Text inside @-->
+<!--@screenshot https://s3-us-west-2.amazonaws.com/bloks.co/bloks/image/text-inside/screenshot.png @-->
+<!--@vars
+{
+    "title": "Cover only image",
+    "backdrop": "rgba(255, 255, 255, 0.1)",
+    "header": "<h2><strong>Birds of the sky</strong></h2>",
+    "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quam purus, eleifend in neque a.</p>",
+    "media": {
+            "type": "image",
+            "url": "https://s3-us-west-2.amazonaws.com/bloks.co/bloks/image/text-inside/text-inside.jpg",
+            "allowvideo": true,
+            "volume": "0",
+            "href": "",
+            "autoplay": false,
+            "newtab": false
+        },
+    "colorsets": {
+        "dark": {
+            "styles.backgroundColor": "#4D4D4D"
+        },
+        "none": {
+            "styles.backgroundColor": "#FFFFFF"
+        }
+    },
+    "settings": {
+        "header": true,
+        "content": true
+    },
+    "styles": {
+        "paddingTop": 30,
+        "paddingBottom": 30
+    }
+}
+@-->
+<div v-bind:class="colorset"
+     v-settings="{ title: 'Images <span class=\'\ibloks-chevron-right\'\></span> Text inside', layout: 'settings', colorpicker: 'backdrop'}"
+     v-bind:style="{
+     backgroundAttachment:styles.backgroundAttachment,
+     paddingTop: styles.paddingTop + 'px',
+     paddingBottom: styles.paddingBottom + 'px',
+     paddingRight: styles.paddingRight + 'px',
+     paddingLeft: styles.paddingLeft + 'px',
+     backgroundImage: 'url(' + styles.backgroundImage + ')',
+     backgroundRepeat: styles.backgroundRepeat,
+     backgroundPosition: styles.backgroundPosition,
+     }"
+     class="bloks__block">
+    <div class="bloks__block-content bloks__block-boxed">
+        <div class="bloks__block-media">
+            <bloks-media :title.sync="header" :type.sync="media.type" :backdrop.sync="backdrop" :src.sync="media.url"
+                         :autoplay.sync="media.autoplay" :href.sync="media.href" :newtab.sync="media.newtab"
+                         :settings="{ volume: media.volume, controls: false, browser: '.cover-background' }"
+                         :class="cover-background"></bloks-media>
+        </div>
+        <div class="bloks__block-text-in-image" slot="before-content">
+            <div class="title-header" v-if="settings.header">
+                <bloks-editor :content.sync="header" placeholder="Please enter your title here!" default-paragraph="h2"
+                              class="bloks__block-text-header" :mode="['full']"></bloks-editor>
+            </div>
+            <div class="title-sub-header" v-if="settings.content">
+                <bloks-editor :content.sync="description"
+                              class="bloks__block-text-description"></bloks-editor>
+            </div>
+        </div>
+
+    </div>
+</div>

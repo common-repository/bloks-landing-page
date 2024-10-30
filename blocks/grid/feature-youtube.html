@@ -1,0 +1,119 @@
+<!--@name Grid Media @-->
+<!--@screenshot https://s3-us-west-2.amazonaws.com/bloks.co/bloks/grid/grid-media/screenshot.png @-->
+<!--@vars
+{
+    "settings": {
+        "showtitle": true,
+        "showdescription": true,
+        "showbutton": true
+    },
+    "link": {
+        "link": "#",
+        "target": "_self",
+        "showtab": false
+    },
+    "styles": {
+        "paddingTop": 30,
+        "paddingBottom": 30
+    },
+    "title": "EGD Media",
+    "type": "youtube",
+    "href": "http://egd.vn",
+    "backdrop": "",
+    "volume": 5,
+    "src": "PJq_p1b-Zbc",
+    "autoplay": false,
+    "newtab": false
+}
+@-->
+
+<!--@grid
+[
+    {
+        "type": "media",
+        "isgrid": "1"
+    },
+    {
+        "type": "text",
+        "title": "<h2><strong>Our Works In Video</strong></h2>",
+        "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit quam purus, eleifend in neque a, pellentesque facilisis sem ellentesque sed tempor nisl.</p>",
+        "isgrid": "1",
+        "button": "1"
+    }
+]
+@-->
+<!--@button
+{
+    "text": "Read more",
+    "align": "bloks__button-left",
+    "size": "bloks__button-medium",
+    "href": "#",
+    "background": "transparent",
+    "color": "#6C6C6C",
+    "newtab": false
+}
+@-->
+<!--@colorsets
+{
+    "dark": {
+        "styles.backgroundColor": "rgba(77, 77, 77, 1)",
+        "button.color": "#ffffff"
+    },
+    "none": {
+        "styles.backgroundColor": "rgba(255, 255, 255, 0.6)",
+        "button.color": "#6C6C6C"
+    }
+}
+@-->
+<div v-bind:class="colorset" class="bloks__block bloks__block-grid"
+     v-bind:style="{
+     backgroundAttachment:styles.backgroundAttachment,
+     paddingTop: styles.paddingTop + 'px',
+     paddingBottom: styles.paddingBottom + 'px',
+     paddingRight: styles.paddingRight + 'px',
+     paddingLeft: styles.paddingLeft + 'px',
+     backgroundImage: 'url(' + styles.backgroundImage + ')',
+     backgroundRepeat: styles.backgroundRepeat,
+     backgroundPosition: styles.backgroundPosition,
+     }"
+     v-settings="{ title: 'Grid <span class=\'\ibloks-chevron-right\'\></span> Media', colorpicker: 'backdrop', grid: 'settings'}">
+    <div class="bloks-wrap-container">
+        <div v-bind:class="styles.classContainer" class="bloks__block-boxed">
+            <div class="container-fluid">
+                <div class="row grid-content">
+                    <div class="col-md-12 grid-text-content grid-two-cols">
+                        <div class="col-md-6 grid-cols" v-for="(n, item) in grid">
+                            <div class="grid-item" v-col>
+                                <div class="view-media feature-tool">
+                                    <div v-if="grid[n].type == 'media'" class="show-media">
+                                        <bloks-media :title.sync="title" :href.sync="href" :type.sync="type"
+                                                     :backdrop="backdrop" :src.sync="src"
+                                                     :autoplay.sync="autoplay" :newtab.sync="newtab"
+                                                     :settings="{ volume: volume }"></bloks-media>
+                                    </div>
+                                    <div v-if="grid[n].type == 'text'">
+                                        <div v-if="settings.showtitle" data-element="title" class="title hero">
+                                            <bloks-editor :content.sync="grid[n].title" placeholder="Your title here!" default-paragraph="h2" :mode="['full']"></bloks-editor>
+                                        </div>
+                                        <div v-if="settings.showdescription" data-element="description" class="description">
+                                            <bloks-editor :content.sync="grid[n].description" placeholder="Your text here!"></bloks-editor>
+                                        </div>
+                                        <bloks-button v-if="grid[n].button !== undefined && settings.showbutton"
+                                                      :href.sync="button.href"
+                                                      :title.sync="button.text"
+                                                      :align.sync="button.align"
+                                                      :size.sync="button.size"
+                                                      :background.sync="button.background"
+                                                      :color.sync="button.color"
+                                                      :newtab.sync="button.newtab"></bloks-button>
+                                    </div>
+                                    <input type="hidden" value="{{n}}" name="index"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<!--@name Heading @-->
+<!--@screenshot https://s3-us-west-2.amazonaws.com/bloks.co/bloks/text/heading/screenshot.png @-->
+<!--@styles
+{
+    "paddingTop": 30,
+    "paddingBottom": 30,
+    "backgroundImage": "",
+    "backgroundColor": "rgba(255, 255, 255, 0.6)"
+}
+@-->
+<!--@html
+{
+    "title":"<h2 style='text-align: center;'><strong>Heaven on earth</strong></h2>",
+    "description":"<p style='text-align: center;'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quam purus, eleifend in neque a, pellentesque facilisis sem.<br/>Pellentesque sed tempor nisl. Praesent faucibus sit amet est in ultrices. Proin luctus nisi justo, non dictum nibh malesuada</p>"
+}
+@-->
+<!--@colorsets
+{
+    "dark": {
+        "styles.backgroundColor": "rgba(77, 77, 77, 1)"
+    },
+    "none": {
+        "styles.backgroundColor": "rgba(255, 255, 255, 0.6)"
+    }
+}
+@-->
+<div class="bloks__block bloks__block-text bloks__block-text-heading"
+     v-bind:class="colorset"
+     v-bind:style="{
+     backgroundAttachment:styles.backgroundAttachment,
+     paddingTop: styles.paddingTop + 'px',
+     paddingBottom: styles.paddingBottom + 'px',
+     paddingRight: styles.paddingRight + 'px',
+     paddingLeft: styles.paddingLeft + 'px',
+     backgroundRepeat: styles.backgroundRepeat,
+     backgroundPosition: styles.backgroundPosition,
+     backgroundImage: 'url(' + styles.backgroundImage + ')',
+     }"
+     v-settings="{ title: 'Text <span class=\'\ibloks-chevron-right\'\></span> Heading' }"
+>
+    <div class="bloks__block-content bloks__block-boxed">
+        <div class="container-fluid">
+            <bloks-editor :content.sync="html.title" placeholder="Please enter your title here!" default-paragraph="h2"></bloks-editor>
+            <bloks-editor :content.sync="html.description"></bloks-editor>
+        </div>
+    </div>
+</div>
